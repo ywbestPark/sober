@@ -1,0 +1,17 @@
+{
+  "name": "첫 잔 앞에서 · 술의 배신 코치",
+  "short_name": "첫 잔 앞에서",
+  "description": "술자리 유혹 앞에서 바로 꺼내 보는 금주 코치",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f1f5f6",
+  "theme_color": "#0f5c4d",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
