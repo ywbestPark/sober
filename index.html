@@ -44,7 +44,7 @@ label.c input{margin-top:5px;width:18px;height:18px;accent-color:var(--acc)}
 .pr{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px}
 .pr b{display:block;margin-bottom:2px}
 .warn{background:var(--warn);border-radius:12px;padding:14px;margin-bottom:10px}
-a{color:var(--acc);font-weight:700}
+.my{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px}.my summary{font-weight:700;cursor:pointer}.my p{margin:10px 0 0}a{color:var(--acc);font-weight:700}
 button:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 </style>
 </head>
@@ -108,6 +108,19 @@ const P=[
 ["마시는 사람을 부러워하지 않기","책은 부러움이 아니라 측은함의 대상이라고 봅니다."],
 ["이 책은 안전망이 아니다","다시 마셔도 책으로 돌아오면 된다는 생각은 금물이라고 책은 경고합니다."]
 ];
+const M=[
+["술이 긴장을 풀어준다","책은 긴장을 풀어주는 것이 편안한 상황이지 술이 아니라고 봅니다. 불안한 자리에서 마시면 풀리지 않으며, 알코올이 만드는 탈수와 저혈당이 오히려 몸을 긴장시킨다고 설명합니다.","불안한 상황에서 마셔서 정말 편해진 적이 있었나?"],
+["술이 스트레스를 풀어준다","책은 마신 다음 날 몸과 마음, 돈, 관계가 모두 더 힘들어진다고 말합니다. 전날 무슨 말과 행동을 했는지 몰라 불안한 것이 가장 큰 스트레스라고 합니다.","마신 다음 날 아침 기분은 어땠나?"],
+["술이 용기와 자신감을 준다","책은 술이 자연스러운 두려움만 없앨 뿐, 진짜 용기는 오히려 약하게 만든다고 봅니다. 술김에 시비를 거는 것은 용기가 아니라 통제를 잃은 상태라고 합니다.","술김의 행동을 맨정신의 내가 자랑스러워했나?"],
+["술을 마시면 더 즐겁다","책은 즐거움을 만드는 것이 사람과 농담과 음악이지 술이 아니라고 봅니다. 기억이 하나도 나지 않는데 재미있었는지 어떻게 아느냐고 묻습니다.","기억이 끊긴 밤을 즐거웠다고 말할 수 있나?"],
+["술은 사교에 도움이 된다","책은 취기가 오르면 소통이 끊기고 사교가 멈춘다고 봅니다. 새해 파티에서도 처음 두어 시간만 괜찮았고, 이후엔 대화 상대가 사라졌다고 합니다.","술이 오른 사람과 실제로 대화가 되던가?"],
+["적당히 조절해서 마시면 된다","책은 조절하려 의지력을 써야 한다는 것 자체가 이미 제어력을 잃었다는 뜻이라고 봅니다. 한 잔이 들어가면 선택권이 술로 넘어가 두 잔, 열 잔이 된다고 합니다.","마시기 전에 정한 양에서 멈춘 날이 몇 번이었나?"],
+["술은 맛이 좋다","책은 처음 마신 술은 누구에게나 역겨웠다고 말합니다. 맛이 변한 것이 아니라 몸이 독소에 익숙해졌을 뿐이라고 합니다.","처음 마신 날 나는 맛있다고 느꼈나?"],
+["그냥 습관이라서 마신다","책은 마실 이유를 못 찾을 때 습관이라는 핑계를 댄다고 봅니다. 진짜 이유는 술이 스스로 만든 필요라고 합니다.","술을 알기 전의 나는 술이 필요했나?"],
+["갈증이 나서 한잔 한다","알코올은 이뇨제라 몸을 더 마르게 합니다. 책은 다음 잔이 갈증을 잠깐 가라앉히는 것을 즐거움으로 착각하게 된다고 설명합니다.","마신 밤 자다가 물을 들이킨 적이 있나?"],
+["끊으면 평생 괴로울 것이다","책은 가장 큰 장애물이 몸의 금단이 아니라 ‘평생 못 마신다’는 두려움이라고 봅니다. 그 두려움은 술이 만든 가짜라고 말합니다.","못 마신다는 생각이 아니라 안 마셔도 된다는 생각으로 바꿔 보면?"],
+["몸이 회복되려면 오래 걸린다","책은 알코올이 빠져 몸이 회복되는 데 보통 3~10일이 걸린다고 설명합니다. 이 기간의 힘듦은 몸이 손상을 되돌리는 과정이라고 봅니다. (책 밖: 오래 많이 마셨다면 먼저 의사와 상의하세요.)","지금 느끼는 불편이 술이 남긴 것은 아닐까?"]
+];
 const CK=["도착하면 음료부터 손에 쥐기","믿는 동료 한 명에게 미리 부탁하기","일어날 시간 정해 두기","첫 잔 권유에 할 말 소리 내어 한 번 연습하기"];
 const app=document.getElementById("app"),nav=document.getElementById("nav");
 let tab="sos",cur=null;
@@ -125,6 +138,10 @@ function sos(){
  <h2>마음속으로 이렇게</h2><div class="mind">“${s.mind}”</div>`+
  (s.say.length?`<h2>이렇게 말하세요</h2>`+s.say.map(x=>`<div class="say">“${x}”</div>`).join(""):"")+
  `<h2>이렇게 행동하세요</h2>${s.extra?'<span class="tag">책 밖 조언</span>':""}<ul class="l">${s.do.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+}
+function myth(){
+ return `<h1>믿음 깨기</h1><p class="mut">책은 술에 대한 흔한 믿음을 하나씩 뒤집습니다. 눌러서 펼쳐 보세요.</p>`+
+ M.map(m=>`<details class="my"><summary>${m[0]}</summary><p>${m[1]}</p><p class="mind" style="font-size:17px">스스로에게 묻기: ${m[2]}</p></details>`).join("");
 }
 function rules(){
  return `<h1>핵심 원칙</h1><p class="mut">책의 지침을 짧게 정리했습니다. 원문은 책에서 확인하세요.</p>`+
@@ -151,8 +168,8 @@ function help(){
  <p class="mut">도움을 받는 것은 약해서가 아니라, 가장 빠르고 안전한 방법입니다.</p>`;
 }
 function render(){
- app.innerHTML={sos,rules,pledge,help}[tab]();
- nav.innerHTML=[["sos","지금 도움"],["rules","원칙"],["pledge","결단"],["help","도움받기"]]
+ app.innerHTML={sos,myth,rules,pledge,help}[tab]();
+ nav.innerHTML=[["sos","지금 도움"],["myth","믿음 깨기"],["rules","원칙"],["pledge","결단"],["help","도움받기"]]
   .map(a=>`<button data-t="${a[0]}" aria-current="${tab===a[0]}">${a[1]}</button>`).join("");
  const bk=document.getElementById("bk");if(bk)bk.onclick=()=>{cur=null;render();scrollTo(0,0)};
  app.querySelectorAll(".sit").forEach(b=>b.onclick=()=>{cur=+b.dataset.n;render();scrollTo(0,0)});
