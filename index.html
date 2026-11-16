@@ -4,17 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="첫 잔 앞에서">
-<meta name="theme-color" content="#0f5c4d">
+<meta name="apple-mobile-web-app-title" content="맑은 선택">
+<meta name="theme-color" content="#0b3a53">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<title>첫 잔 앞에서 · 술의 배신 코치</title>
+<title>맑은 선택 · 금주 가이드</title>
 <style>
-:root{--bg:#f1f5f6;--card:#fff;--ink:#12232e;--mut:#5b6b75;--line:#d9e2e6;--acc:#0f5c4d;--accfg:#fff;--sos:#d9482b;--soft:#e3f0ec;--warn:#fff3df;color-scheme:light;
+:root{--bg:#f4f7fa;--card:#fff;--ink:#0c2233;--mut:#586b7b;--line:#dbe5ee;--acc:#0b4f6c;--accfg:#fff;--sos:#d9482b;--soft:#e4eff6;--warn:#fff3df;color-scheme:light;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e171c;--card:#16232a;--ink:#e8f0f2;--mut:#93a5ae;--line:#26373f;--acc:#4fc3a6;--accfg:#06241d;--sos:#f0694d;--soft:#173129;--warn:#33291a;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0e171c;--card:#16232a;--ink:#e8f0f2;--mut:#93a5ae;--line:#26373f;--acc:#4fc3a6;--accfg:#06241d;--sos:#f0694d;--soft:#173129;--warn:#33291a;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#09131b;--card:#112230;--ink:#e8f1f7;--mut:#93a8b8;--line:#223646;--acc:#6cc7e0;--accfg:#06222e;--sos:#f0694d;--soft:#143041;--warn:#33291a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#09131b;--card:#112230;--ink:#e8f1f7;--mut:#93a8b8;--line:#223646;--acc:#6cc7e0;--accfg:#06222e;--sos:#f0694d;--soft:#143041;--warn:#33291a;color-scheme:dark}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
@@ -25,8 +25,8 @@ p{margin:0 0 10px}
 .mut{color:var(--mut);font-size:14px}
 button{font:inherit;color:inherit;cursor:pointer}
 .sit{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px}
-.sit b{display:block;font-size:16px}.sit span.i{font-size:26px}
-.hero{background:var(--acc);color:var(--accfg);border-radius:18px;padding:20px;margin:12px 0 18px}
+.sit b{display:block;font-size:16px}.sit .i{width:44px;height:44px;border-radius:12px;background:var(--soft);color:var(--acc);display:grid;place-items:center;flex:none}
+.hero{background:linear-gradient(155deg,#0b3a53,#136d85);color:#fff;border-radius:18px;padding:22px 20px;margin:12px 0 18px}.stmt{font-family:"Noto Serif KR","Nanum Myeongjo","AppleMyungjo",Georgia,serif;font-size:26px;line-height:1.45;margin:8px 0 0;font-weight:600}.lab{font-size:13px;letter-spacing:.06em;opacity:.8}
 .hero h1{font-family:"Noto Serif KR","Nanum Myeongjo","AppleMyungjo",Georgia,serif;font-size:24px;margin:0 0 6px}
 .hero p{margin:0;opacity:.92;font-size:15px}
 .back{background:none;border:0;color:var(--acc);font-weight:700;padding:8px 0;font-size:15px}
@@ -36,7 +36,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 ul.l{margin:0;padding-left:20px}ul.l li{margin-bottom:6px}
 .tag{display:inline-block;font-size:12px;background:var(--warn);border-radius:6px;padding:1px 8px;margin-bottom:6px}
 nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
-nav button{flex:1;background:none;border:0;padding:12px 4px;font-size:13px;color:var(--mut)}
+nav button{flex:1;background:none;border:0;padding:8px 2px 10px;font-size:12px;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:3px}
 nav button[aria-current="true"]{color:var(--acc);font-weight:700}
 textarea{width:100%;min-height:90px;font:inherit;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px}
 label.c{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:8px}
@@ -53,43 +53,58 @@ button:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible{
 <nav id="nav"></nav>
 <script>
 // 책 《술의 배신》의 관점을 상황별로 정리한 내용입니다. 책 문장을 그대로 옮기지 않고 요약했습니다.
+const IC={
+users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
+ban:'<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>',
+chat:'<path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-5.4A8 8 0 1 1 21 12z"/>',
+brief:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+home:'<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+trophy:'<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/>',
+shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>',
+refresh:'<path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/>',
+sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+book:'<path d="M2 4h7a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H2zM22 4h-7a3 3 0 0 0-3 3v14a2 2 0 0 1 2-2h8z"/>',
+note:'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+buoy:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M14.9 9.1l4.2-4.2M4.9 19.1l4.2-4.2"/>'};
+const ic=(k,z=24)=>`<svg viewBox="0 0 24 24" width="${z}" height="${z}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[k]}</svg>`;
+const D=["나는 술이 필요 없다.","오늘도 맑은 정신으로 내가 선택한다.","나는 포기한 것이 없고, 되찾고 있다.","술 없이도 나는 충분히 즐겁고 충분히 강하다.","첫 잔을 들지 않는 것이 나의 자유다.","어젯밤의 기억이 모두 있는 아침이 나의 일상이다.","나는 증명할 것이 없다. 마시지 않을 뿐이다.","내 시간과 돈은 나를 위해 쓴다.","스트레스는 맨정신으로 마주한다.","나는 술의 덫에서 이미 나왔다.","오늘의 나는 내가 존중할 수 있는 사람이다.","술 생각이 스쳐도 괜찮다. 선택은 이미 끝났다."];
 const S=[
-{i:"🎉",t:"송년회·회식 가기 전",sub:"자리에 가기 전 마음 정리",
+{i:"users",t:"송년회·회식 가기 전",sub:"자리에 가기 전 마음 정리",
 book:"책은 모임과 회식을 피하지 말라고 합니다. 술을 끊은 것이지 삶을 중단한 게 아니고, 맨정신의 나로 사람들을 만나면 즐거움이 오히려 커진다고 합니다.",
 mind:"나는 포기하는 게 없다. 오늘은 맨정신으로 즐긴다.",
 say:["저는 오늘 안 마십니다.","술은 끊었고, 자리는 끝까지 함께하겠습니다."],
 do:["도착하면 가장 먼저 음료부터 손에 쥐기","믿는 동료 한 명에게 미리 “권하면 말려줘”라고 부탁하기","일어날 시간을 미리 정해 두기 (1차만 있어도 괜찮습니다)"]},
-{i:"🥂",t:"누가 첫 잔을 권할 때",sub:"받지 않고 넘기는 법",
+{i:"ban",t:"누가 첫 잔을 권할 때",sub:"받지 않고 넘기는 법",
 book:"술을 마시는 이유를 설명해야 하는 쪽은 마시는 사람이라고 합니다. 책은 핑계 대신 사실을 말하라고 합니다.",
 mind:"나는 이유를 대지 않는다. 사실만 말한다.",
 say:["이제는 술을 원치 않아요.","이제는 마실 필요가 없어요.","저는 비음주자예요."],
 do:["웃으면서, 한 문장으로 끝내기","운전이나 약 같은 핑계는 대지 않기","바로 다른 화제로 넘기기"]},
-{i:"🗣️",t:"“조금은 괜찮아”라고 설득할 때",sub:"동료의 설득 앞에서",
+{i:"chat",t:"“조금은 괜찮아”라고 설득할 때",sub:"동료의 설득 앞에서",
 book:"책은 ‘딱 한 잔’에 즐거움이 있다고 믿으면 백만 잔에도 있다고 믿게 된다고 말합니다. 한 잔은 연쇄반응의 시작입니다.",
 mind:"한 잔은 한 잔으로 끝나지 않는다. 첫 잔이 전부의 시작이다.",
 say:["저는 한 잔으로 끝나는 사람이 아니라서, 아예 안 마십니다.","조금만이 제일 어려워요. 그래서 안 마시기로 했어요.","이미 정했어요. 건배는 이 잔으로 할게요."],
 do:["“다음에 마실게요”, “오늘만 쉴게요”는 말하지 않기 (문을 열어 두는 말입니다)","설득이 길어지면 자리에서 잠깐 일어나기"]},
-{i:"😤",t:"스트레스받은 날·퇴근길",sub:"풀고 싶은 마음이 올라올 때",
+{i:"brief",t:"스트레스받은 날·퇴근길",sub:"풀고 싶은 마음이 올라올 때",
 book:"책은 술이 스트레스를 풀어주는 게 아니라 키운다고 봅니다. 이미 힘든 상황에 술로 나를 더 괴롭힐 이유가 없습니다.",
 mind:"힘든 날 술을 더하면 내일이 더 힘들다.",
 say:[],
 do:["술집과 마트를 일부러 피해 돌아가려 애쓰지 말고, 그냥 안 마시기로 하기","생과일주스 같은 영양 보충 (책이 권하는 방법)","가족이나 믿는 사람에게 전화 한 통"]},
-{i:"🛋️",t:"혼자 있는데 술 생각이 날 때",sub:"갈망이 올라올 때",
+{i:"home",t:"혼자 있는데 술 생각이 날 때",sub:"갈망이 올라올 때",
 book:"책은 술 생각을 억지로 안 하려 하지 말라고 합니다. 생각이 날 때마다 관점을 바꾸라고 합니다.",
 mind:"난 이제 술이 필요 없어. 완전 자유야. 난 비음주자야!",
 say:[],
 do:["위 문장을 소리 내어 말하기","생각이 난다고 불안해하지 않기. 지나가는 생각일 뿐입니다","그 자리에서 물이나 주스부터 마시기"]},
-{i:"🏆",t:"축하할 일이 생겼을 때",sub:"축하는 곧 술이라는 믿음",
+{i:"trophy",t:"축하할 일이 생겼을 때",sub:"축하는 곧 술이라는 믿음",
 book:"책은 축하를 곧 음주로 여기는 믿음이 문제라고 합니다. 축하 자리를 피하지 말고 술 없이 누려 보라고 합니다.",
 mind:"축하에 술은 필요 없다. 오늘은 맨정신이라 더 오래 기억할 것이다.",
 say:["오늘은 이 잔으로 건배!"],
 do:["축하 자리를 피하지 않기","무알코올 맥주는 피하기 (책은 “희생하고 있다”는 느낌을 굳힌다고 봅니다)"]},
-{i:"🙈",t:"‘이번 한 번만’ 마음이 흔들릴 때",sub:"잔에 손이 가기 직전",
+{i:"shield",t:"‘이번 한 번만’ 마음이 흔들릴 때",sub:"잔에 손이 가기 직전",
 book:"책은 이 책이 몇 번이고 구해주는 안전망이 아니라고 경고합니다. 첫 잔이 다시 시작이 됩니다.",
 mind:"열쇠는 던졌다. 첫 잔을 들지 않는다.",
 say:["잠깐 화장실 다녀올게요."],
 do:["잔을 들기 전에 멈추고 자리에서 일어나기","시원한 음료로 바꿔 쥐기","믿는 사람에게 문자 보내기: “지금 흔들려. 5분만 통화해줘.”"]},
-{i:"💔",t:"이미 마셨거나 실수했을 때",sub:"더 번지지 않게 멈추기",
+{i:"refresh",t:"이미 마셨거나 실수했을 때",sub:"더 번지지 않게 멈추기",
 book:"책은 과거의 실패 경험을 평생 마음에 담아 두지 말라고 합니다. 어제의 일이 오늘의 성공을 막게 두지 말라는 뜻입니다.",
 mind:"지금 이 순간 멈추는 것이 가장 좋은 선택이다.",
 say:["저 먼저 일어나겠습니다."],
@@ -145,36 +160,36 @@ const E=[
 ];
 const CK=["도착하면 음료부터 손에 쥐기","믿는 동료 한 명에게 미리 부탁하기","일어날 시간 정해 두기","첫 잔 권유에 할 말 소리 내어 한 번 연습하기"];
 const app=document.getElementById("app"),nav=document.getElementById("nav");
-let tab="sos",cur=null,sub="myth";const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+let tab="today",cur=null,sub="myth";const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
 function sg(k,d){try{const v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}}
 function ss(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function sos(){
  if(cur===null){
-  return `<div class="hero"><h1>지금 흔들리나요?</h1><p>상황을 고르면 책의 관점에서 바로 할 말과 할 일을 보여줍니다.</p></div>`+
-  S.map((s,n)=>`<button class="sit" data-n="${n}"><span class="i">${s.i}</span><span><b>${s.t}</b><span class="mut">${s.sub}</span></span></button>`).join("")+
+  return `<div class="hero"><div class="lab">지금 대응</div><h1>이 순간의 선택은 이미 정해져 있습니다</h1><p>상황을 고르면 책의 원칙에 따른 선언, 할 말, 행동 지침을 바로 안내합니다.</p></div>`+
+  S.map((s,n)=>`<button class="sit" data-n="${n}"><span class="i">${ic(s.i)}</span><span><b>${s.t}</b><span class="mut">${s.sub}</span></span></button>`).join("")+
   `<p class="mut">첫 잔을 막는 것이 가장 확실한 안전장치입니다.</p>`;
  }
  const s=S[cur];
- return `<button class="back" id="bk">‹ 상황 목록</button><h1>${s.i} ${s.t}</h1>
+ return `<button class="back" id="bk">‹ 상황 목록</button><h1>${s.t}</h1>
  <h2>책의 관점</h2><div class="box">${s.book}</div>
- <h2>마음속으로 이렇게</h2><div class="mind">“${s.mind}”</div>`+
- (s.say.length?`<h2>이렇게 말하세요</h2>`+s.say.map(x=>`<div class="say">“${x}”</div>`).join(""):"")+
- `<h2>이렇게 행동하세요</h2>${s.extra?'<span class="tag">책 밖 조언</span>':""}<ul class="l">${s.do.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+ <h2>마음속 선언</h2><div class="mind">“${s.mind}”</div>`+
+ (s.say.length?`<h2>그 자리에서 할 말</h2>`+s.say.map(x=>`<div class="say">“${x}”</div>`).join(""):"")+
+ `<h2>행동 지침</h2>${s.extra?'<span class="tag">책 밖 조언</span>':""}<ul class="l">${s.do.map(x=>`<li>${x}</li>`).join("")}</ul>`;
 }
 function myth(){
- return `<h1>믿음 깨기</h1><p class="mut">책은 술에 대한 흔한 믿음을 하나씩 뒤집습니다. 눌러서 펼쳐 보세요.</p>`+
+ return `<h1>진실 확인</h1><p class="mut">술에 대한 흔한 믿음을 책의 논리로 하나씩 바로잡습니다. 눌러서 펼쳐 보세요.</p>`+
  M.map(m=>`<details class="my"><summary>${m[0]}</summary><p>${m[1]}</p><p class="mind" style="font-size:17px">스스로에게 묻기: ${m[2]}</p></details>`).join("");
 }
 function gift(){
- return `<h1>금주의 선물</h1><p class="mut">책은 끊어서 잃는 것이 아니라 얻는 것에 집중하라고 합니다. 책이 꼽는 것들입니다.</p>`+
+ return `<h1>금주로 되찾는 것들</h1><p class="mut">책은 끊어서 잃는 것이 아니라 되찾는 것에 집중하라고 합니다. 술이 빼앗아 갔던 것들입니다.</p>`+
  G.map(g=>`<div class="box"><b>${g[0]}</b><p>${g[1]}</p><div class="mind" style="font-size:16px;margin:0">“${g[2]}”</div></div>`).join("");
 }
 function learn(){
- return `<div class="seg">`+[["myth","믿음 깨기"],["gift","금주의 선물"],["rules","원칙"]].map(a=>`<button data-s="${a[0]}" aria-pressed="${sub===a[0]}">${a[1]}</button>`).join("")+`</div>`+{myth,gift,rules}[sub]();
+ return `<div class="seg">`+[["myth","진실 확인"],["gift","되찾는 것들"],["rules","원칙"]].map(a=>`<button data-s="${a[0]}" aria-pressed="${sub===a[0]}">${a[1]}</button>`).join("")+`</div>`+{myth,gift,rules}[sub]();
 }
 function story(){
  const log=JSON.parse(sg("log","[]"));
- return `<h1>웃어넘기던 이야기들</h1><p class="mut">책은 취중 무용담을 웃음으로 포장하는 것이 술을 정당화하는 방식이라고 봅니다. 아래는 책 속 사례를 요약한 것입니다.</p>`+
+ return `<h1>웃어넘기던 이야기, 그 실체</h1><p class="mut">책은 취중 무용담을 웃음으로 포장하는 것이 술을 정당화하는 방식이라고 봅니다. 아래는 책 속 사례를 요약한 것입니다.</p>`+
  E.map(e=>`<details class="my"><summary>${e[0]}</summary><p>${e[1]}</p><p class="mind" style="font-size:17px">${e[2]}</p></details>`).join("")+
  `<h2>나의 기록</h2><p class="mut">웃어넘겼던 내 일을 사실 그대로 한 줄씩 적어 보세요. 목적은 자책이 아니라, 그 일을 한 것이 ‘술’이었음을 직시하는 것입니다.</p>
  <textarea id="ex" placeholder="예: 택시 안에서 달리는 중 차문을 열었다. 기억은 없다."></textarea>
@@ -187,6 +202,17 @@ function rules(){
  return `<h1>핵심 원칙</h1><p class="mut">책의 지침을 짧게 정리했습니다. 원문은 책에서 확인하세요.</p>`+
  P.map((p,n)=>`<div class="pr"><b>${n+1}. ${p[0]}</b>${p[1]}</div>`).join("");
 }
+function today(){
+ const d=Math.floor(Date.now()/864e5),ck=JSON.parse(sg("ck","[]")),m=M[d%M.length];
+ return `<div class="hero"><div class="lab">오늘의 선언</div><p class="stmt">${D[d%D.length]}</p></div>
+ <button class="sit" data-go="sos"><span class="i">${ic("shield")}</span><span><b>지금 대응</b><span class="mut">흔들리는 순간, 상황별 안내 열기</span></span></button>
+ <h2>오늘의 진실</h2><div class="box"><b>${m[0]}</b><p>${m[1]}</p></div>
+ <h2>나의 결단문</h2>
+ <textarea id="pl" placeholder="예: 나는 마지막 잔을 마셨고, 이제 술이 필요 없다.">${esc(sg("pl",""))}</textarea>
+ <h2>술자리 전 점검</h2>`+
+ CK.map((c,n)=>`<label class="c"><input type="checkbox" data-c="${n}" ${ck.includes(n)?"checked":""}><span>${c}</span></label>`).join("")+
+ `<button class="back" id="rs">점검 초기화</button>`;
+}
 function pledge(){
  const ck=JSON.parse(sg("ck","[]"));
  return `<h1>나의 결단</h1><p class="mut">이 기기에만 저장되며 다른 곳으로 전송되지 않습니다.</p>
@@ -197,7 +223,7 @@ function pledge(){
  `<button class="back" id="rs">점검 초기화</button>`;
 }
 function help(){
- return `<h1>도움받기</h1>
+ return `<h1>전문 도움</h1>
  <div class="warn"><b>이 앱은 책의 관점을 정리한 것이며 의료 조언이 아닙니다.</b></div>
  <h2>이런 경우에는 전문가를 만나세요</h2>
  <ul class="l"><li>필름이 자주 끊기거나, 취하면 욕설과 폭력성이 나오는 일이 반복될 때</li>
@@ -208,9 +234,9 @@ function help(){
  <p class="mut">도움을 받는 것은 약해서가 아니라, 가장 빠르고 안전한 방법입니다.</p>`;
 }
 function render(){
- app.innerHTML={sos,learn,story,pledge,help}[tab]();
- nav.innerHTML=[["sos","지금 도움"],["learn","읽기"],["story","경험담"],["pledge","결단"],["help","도움받기"]]
-  .map(a=>`<button data-t="${a[0]}" aria-current="${tab===a[0]}">${a[1]}</button>`).join("");
+ app.innerHTML={today,sos,learn,story,help}[tab]();
+ nav.innerHTML=[["today","오늘","sun"],["sos","지금 대응","shield"],["learn","이해","book"],["story","기록","note"],["help","전문 도움","buoy"]]
+  .map(a=>`<button data-t="${a[0]}" aria-current="${tab===a[0]}">${ic(a[2],22)}<span>${a[1]}</span></button>`).join("");
  const bk=document.getElementById("bk");if(bk)bk.onclick=()=>{cur=null;render();scrollTo(0,0)};
  app.querySelectorAll(".sit").forEach(b=>b.onclick=()=>{cur=+b.dataset.n;render();scrollTo(0,0)});
  nav.querySelectorAll("button").forEach(b=>b.onclick=()=>{tab=b.dataset.t;cur=null;render();scrollTo(0,0)});
@@ -221,6 +247,7 @@ function render(){
  const ad=document.getElementById("ad");if(ad)ad.onclick=()=>{const v=document.getElementById("ex").value.trim();if(!v)return;const l=JSON.parse(sg("log","[]"));l.unshift({d:new Date().toLocaleDateString("ko-KR"),t:v});ss("log",JSON.stringify(l));render()};
  app.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{const l=JSON.parse(sg("log","[]"));l.splice(+b.dataset.del,1);ss("log",JSON.stringify(l));render()});
  const cp=document.getElementById("cp");if(cp)cp.onclick=()=>{const l=JSON.parse(sg("log","[]"));try{navigator.clipboard.writeText(l.map(x=>x.d+"\n"+x.t).join("\n\n")).then(()=>{cp.textContent="복사했습니다"})}catch(e){}};
+ app.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{tab=b.dataset.go;cur=null;render();scrollTo(0,0)});
  const rs=document.getElementById("rs");if(rs)rs.onclick=()=>{ss("ck","[]");render()};
 }
 render();

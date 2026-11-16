@@ -1,6 +1,6 @@
 // 서비스 워커: 앱 파일을 캐시해 오프라인에서도 열리게 합니다.
 // index.html 등을 수정해 배포할 때는 CACHE 버전을 올려야 기존 사용자에게 새 내용이 반영됩니다.
-const CACHE = "sober-coach-v3";
+const CACHE = "sober-coach-v4";
 const FILES = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "icons/apple-touch-icon.png"];
 
 self.addEventListener("install", (e) => {
